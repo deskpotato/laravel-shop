@@ -19,8 +19,8 @@
         <ul class="navbar-nav navbar-right">
           <!-- 登录注册链接开始 -->
           @guest
-          <li class="nav-item"><a class="nav-link" href="">登录</a></li>
-          <li class="nav-item"><a class="nav-link" href="">注册</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登录</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
           @else
           <li class="nav-item">
             <a class="nav-link mt-1" href=""><i class="fa fa-shopping-cart"></i></a>
@@ -36,7 +36,7 @@
               <a href="" class="dropdown-item">我的收藏</a>
               <a class="dropdown-item" id="logout" href="#"
                  onclick="event.preventDefault();document.getElementById('logout-form').submit();">退出登录</a>
-              <form id="logout-form" action="" method="POST" style="display: none;">
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
               </form>
             </div>
