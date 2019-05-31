@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\User;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -10,7 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class UsersController extends Controller
+class ProductsController extends Controller
 {
     use HasResourceActions;
 
@@ -79,14 +79,17 @@ class UsersController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new User);
+        $grid = new Grid(new Product);
 
         $grid->id('Id');
-        $grid->name('Name');
-        $grid->email('Email');
-        $grid->email_verified_at('邮箱认证时间');
-        $grid->password('Password');
-        $grid->remember_token('Remember token');
+        $grid->title('标题');
+        $grid->description('描述');
+        $grid->image('Image');
+        $grid->on_sale('是否在售');
+        $grid->rating('评分');
+        $grid->sold_count('销量');
+        $grid->review_count('评论数');
+        $grid->price('价格');
         $grid->created_at('创建时间');
         $grid->updated_at('更新时间');
 
@@ -101,14 +104,17 @@ class UsersController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(User::findOrFail($id));
+        $show = new Show(Product::findOrFail($id));
 
         $show->id('Id');
-        $show->name('Name');
-        $show->email('Email');
-        $show->email_verified_at('Email verified at');
-        $show->password('Password');
-        $show->remember_token('Remember token');
+        $show->title('Title');
+        $show->description('Description');
+        $show->image('Image');
+        $show->on_sale('On sale');
+        $show->rating('Rating');
+        $show->sold_count('Sold count');
+        $show->review_count('Review count');
+        $show->price('Price');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
 
@@ -122,13 +128,16 @@ class UsersController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new User);
+        $form = new Form(new Product);
 
-        $form->text('name', 'Name');
-        $form->email('email', 'Email');
-        $form->datetime('email_verified_at', 'Email verified at')->default(date('Y-m-d H:i:s'));
-        $form->password('password', 'Password');
-        $form->text('remember_token', 'Remember token');
+        $form->text('title', 'Title');
+        $form->textarea('description', 'Description');
+        $form->image('image', 'Image');
+        $form->switch('on_sale', 'On sale')->default(1);
+        $form->decimal('rating', 'Rating')->default(5.00);
+        $form->number('sold_count', 'Sold count');
+        $form->number('review_count', 'Review count');
+        $form->decimal('price', 'Price');
 
         return $form;
     }
