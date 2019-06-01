@@ -22,6 +22,6 @@ class Product extends Model
         if (Str::startsWith($this->attributes['image'], ['http://', 'https://'])) {
             return $this->attributes['image'];
         }
-        return env('APP_URL').'/uploads/'.$this->attributes['image'];
+        return env('APP_URL').'/storage/uploads/'.$this->attributes['image'];
     }
 }
