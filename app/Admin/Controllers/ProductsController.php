@@ -143,8 +143,9 @@ class ProductsController extends Controller
         $form = new Form(new Product);
 
         $form->text('title', '标题')->rules('required');
-        $form->textarea('description', '描述')->rules('required');
-        $form->image('image', '图片')->uniqueName()->rules('required|image');
+        $form->UEditor('description', '描述')->rules('required');
+        // $form->image('image', '图片')->uniqueName()->rules('required|image');
+        $form->cropper('image','图片');
         $form->switch('on_sale', '是否在售')->default(1);
         $form->decimal('rating', '评分')->default(5.00);
         $form->number('sold_count', '销量');
